@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matematica pentru toti</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="menu-icon" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+        <div class="sidebar-content">
+            <h2>Meniu Jocuri</h2>
+            <hr>
+            <button onclick="switchCategory('arcade')">🎮 Jocuri Arcade</button>
+            <button onclick="switchCategory('stats')">📊 Statistici</button>
+            <button onclick="location.reload()">🏠 Pagina Principală</button>
+        </div>
+    </div>
+
+    <div class="header">
+        <h1>Academia de Mate</h1>
+        <p>Alege ce vrei sa exersezi astazi:</p>
+    </div>
+
+    <div class="meniu-principal">
+        <button class="card adunare" onclick="startJoc('adunare')">Adunări<span>➕</span></button>
+        <button class="card scadere" onclick="startJoc('scadere')">Scăderi<span>➖</span></button>
+        <button class="card inmultire" onclick="startJoc('inmultire')">Înmulțiri<span>✖️</span></button>
+        <button class="card impartire" onclick="startJoc('impartire')">Împărțiri<span>➗</span></button>
+    </div>
+
+    <div id="zona-exercitiu" style="display:none;">
+        <h2 id="operatie-titlu">Adunari</h2>
+        <div class="display-calcul">
+            <span id="num1">0</span> 
+            <span id="operator">+</span> 
+            <span id="num2">0</span> = 
+            <input type="number" id="raspuns">
+        </div>
+        <button onclick="verifica()" class="btn-trimite">Verifica!</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

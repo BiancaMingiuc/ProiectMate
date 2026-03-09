@@ -1,0 +1,189 @@
+/* 1. Resetăm marginile și setăm fundalul */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrează pe orizontală */
+    justify-content: center; /* Centrează pe verticală */
+    min-height: 100vh; /* Ocupă toată înălțimea ecranului */
+    background-color: #f0f7ff; /* Un albastru foarte deschis, relaxant */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 2. Stilul titlului */
+h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 2.5rem;
+}
+
+p {
+    margin-bottom: 10px; /* Scoatem marginile implicite ca să avem control total */
+}
+
+.subtitle {
+    color: #546e7a;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Containerul care ține toate cardurile */
+.meniu-principal {
+    display: flex;
+    flex-direction: row; /* Le pune una lângă alta */
+    justify-content: center; /* Le centrează pe orizontală */
+    align-items: center; /* Le centrează pe verticală */
+    gap: 25px; /* Spațiul dintre cărți */
+    flex-wrap: wrap; /* Esențial: dacă nu au loc, trec pe rândul următor */
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px; /* Previne întinderea exagerată pe monitoare mari */
+}
+
+/* Stilul fiecărei "cărți" */
+.card {
+    background: white;
+    width: 200px;   /* Lățime fixă ca să arate ca o carte */
+    height: 280px;  /* Înălțime mai mare decât lățimea */
+    display: flex;
+    flex-direction: column; /* Pune iconița sus și textul jos */
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Efectul de ridicare când pui mouse-ul */
+.card:hover {
+    transform: translateY(-15px) rotate(2deg); /* Se ridică și se înclină puțin, ca o carte ridicată de pe masă */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* Stil pentru iconița mare din interiorul cărții */
+.card span {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+/* Culori diferite la hover pentru fiecare tip (opțional, dar arată profi) */
+.card:active {
+    transform: scale(0.95); /* Efect de "apăsare" când dai click */
+}
+
+
+/* Stilul de bază al cardului (fundal alb implicit) */
+.card {
+    /* ... (păstrează restul proprietăților de dimensiune și umbră) ... */
+    background: #ffffff;
+    border: 2px solid transparent; /* Pregătim o bordură fină */
+}
+
+/* Culori Pastelate specifice */
+.adunare { 
+    background-color: #e8f5e9 !important; /* Verde Mint pastel */
+    color: #2e7d32;
+}
+.adunare:hover { border-color: #a5d6a7; }
+
+.scadere { 
+    background-color: #ffebee !important; /* Roșu Rozaliu pastel */
+    color: #c62828;
+}
+.scadere:hover { border-color: #ef9a9a; }
+
+.inmultire { 
+    background-color: #fff3e0 !important; /* Portocaliu Piersică pastel */
+    color: #e65100;
+}
+.inmultire:hover { border-color: #ffcc80; }
+
+.impartire { 
+    background-color: #f3e5f5 !important; /* Violet Lavandă pastel */
+    color: #6a1b9a;
+}
+.impartire:hover { border-color: #ce93d8; }
+
+/* Stil pentru butonul hamburger */
+#menu-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#menu-icon span {
+    display: block;
+    height: 5px;
+    width: 100%;
+    background-color: #2c3e50;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* Stil pentru Sidebar (Meniul lateral) */
+.sidebar {
+    height: 100%;
+    width: 0; /* Începe cu lățime 0 (ascuns) */
+    position: fixed;
+    z-index: 1001;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    transition: 0.5s; /* Efectul de alunecare */
+    padding-top: 60px;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+}
+
+.sidebar-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sidebar h2 { color: #2c3e50; font-size: 1.5rem; }
+
+.sidebar button {
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #f0f7ff;
+    color: #2c3e50;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: left;
+}
+
+.sidebar button:hover {
+    background: #e3f2fd;
+    transform: translateX(10px);
+}
+
+/* Butonul de închidere (X) */
+.sidebar .closebtn {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 36px;
+    text-decoration: none;
+    color: #2c3e50;
+}
