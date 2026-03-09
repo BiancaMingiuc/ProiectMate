@@ -33,9 +33,10 @@ h1 {
     margin-bottom: 15px; /* Creează spațiul acela de care vorbeam mai devreme */
 }
 
-.subtitle {
+.subtitle, .subtitle2 {
     display: inline-block;
     margin-top: 15px;
+    margin-bottom: 10px;
     padding: 12px 30px;
     background: rgba(255, 255, 255, 0.7); /* Efect de sticlă */
     backdrop-filter: blur(10px); /* Încețoșează fundalul din spate */
@@ -271,4 +272,179 @@ h1 {
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 4px;
+}
+
+.mixt {
+    flex: 1 1 100% !important; /* Îl forțăm să ocupe 100% din lățime */
+    max-width: 700px !important; /* Îl aliniem cu lățimea a două carduri de sus + gap */
+    max-height: 150px !important; /* Mai scund decât celelalte, fiind dreptunghiular */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    flex-direction: row !important; /* Textul și pictograma vor sta unul lângă altul */
+    gap: 30px;
+}
+
+.mixt:hover {
+    transform: translateY(-10px); /* Aceasta este proprietatea care îl "ridică" */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Adăugăm umbră ca să pară că plutește */
+}
+
+.mixt span {
+    font-size: 3rem;
+}
+
+.tabel-container-pagina {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow-x: auto;
+}
+
+#tabel-stats-complet {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.2rem;
+}
+
+#tabel-stats-complet th {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-bottom: 2px solid #ddd;
+    color: #555;
+}
+
+#tabel-stats-complet td {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+.btn-back {
+    background-color: #4caf50;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-right: 10px;
+}
+
+.btn-clear-red {
+    background: none;
+    border: 1px solid #ff4757;
+    color: #ff4757;
+    padding: 15px 30px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.display-calcul {
+    font-size: 3rem; /* Numere mari */
+    margin: 40px 0;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+}
+
+#raspuns {
+    width: 120px;
+    font-size: 2.5rem;
+    text-align: center;
+    border: 3px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#raspuns:focus {
+    border-color: #667eea; /* Se colorează când scrii */
+}
+
+
+/* Stilul de bază pentru cifre mari */
+.display-calcul {
+    font-size: 5rem; /* Cifre uriașe */
+    font-weight: bold;
+    margin: 40px 0;
+    transition: opacity 0.3s ease; /* Pregătim efectul de dispariție */
+}
+
+#raspuns {
+    font-size: 4rem;
+    width: 200px;
+    text-align: center;
+    border: 5px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    transition: all 0.3s ease; /* Tranziție fină pentru culori */
+}
+
+/* Clasele de feedback */
+.input-verde {
+    border-color: #4caf50 !important;
+    background-color: #e8f5e9 !important;
+    color: #2e7d32 !important;
+}
+
+.input-rosu {
+    border-color: #f44336 !important;
+    background-color: #ffebee !important;
+    color: #c62828 !important;
+    animation: shake 0.4s; /* Efect de tremurat pentru eroare */
+}
+
+/* Animația de tremurat (optional, dar arată super) */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+/* Clasa pentru efectul de dispariție */
+.dispare {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+/* Ascunde săgețile pentru Chrome, Safari, Edge și Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Ascunde săgețile pentru Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Containerul care ține titlul centrat */
+.titlu-container-joc {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+#titlu-operatie {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #2c3e50;
+    background-color: #ffffff;
+    padding: 15px 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border-bottom: 5px solid #4a90e2; /* O dungă colorată sub text */
+    min-width: 250px;
+    text-align: center;
 }

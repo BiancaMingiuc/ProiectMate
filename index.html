@@ -22,21 +22,6 @@
             <button onclick="afiseazaStatistici()">Stats 📈</button>
             <button onclick="location.reload()">Home 🏠</button>
 
-            <div id="zona-statistici" style="display:none; margin-top: 20px;">
-                <h3 style="color: white; font-size: 1rem;">Istoric Sesiuni</h3>
-                <table id="tabel-stats" style="width: 100%; color: white; border-collapse: collapse; font-size: 0.8rem;">
-                    <thead>
-                        <tr style="border-bottom: 1px solid #555;">
-                            <th>Ora</th>
-                            <th>Tip</th>
-                            <th>✅</th>
-                            <th>❌</th>
-                        </tr>
-                    </thead>
-                    <tbody id="istoric-body"></tbody>
-                </table>
-                <button onclick="stergeIstoric()" style="background: none; border: 1px solid red; color: red; margin-top: 10px; font-size: 0.7rem;">Golește</button>
-            </div>
         </div>
     </div>
 
@@ -53,16 +38,13 @@
         <button class="card scadere" onclick="startJoc('scadere')">Scăderi<span>➖</span></button>
         <button class="card inmultire" onclick="startJoc('inmultire')">Înmulțiri<span>✖️</span></button>
         <button class="card impartire" onclick="startJoc('impartire')">Împărțiri<span>➗</span></button>
+        <button class="card mixt" onclick="startJoc('mixt')">
+            Calcule Mixte <span>🎲</span>
+        </button>
     </div>
 
     <div id="zona-exercitiu" style="display:none;">
-        <div class="scor-container">
-            ✅ Corecte: <span id="scor-corecte">0</span> | 
-            ❌ Greșite: <span id="scor-gresite">0</span>
-        </div>
-        
-        <h2 id="operatie-titlu">Misiune activa</h2>
-        
+        <h2 id="titlu-operatie" class="titlu-misiune">ADUNARE</h2>
         <div class="display-calcul">
             <span id="num1">0</span> 
             <span id="operator">+</span> 
@@ -70,12 +52,47 @@
             <input type="number" id="raspuns">
         </div>
 
+        <div id="feedback-mesaj" style="min-height: 30px; margin-top: 10px; font-weight: bold; font-size: 1.2rem;"></div>
+        
         <div class="control-joc">
-            <button onclick="verifica()" class="btn-trimite">Verifică!</button>
             <button onclick="finalizeazaSesiunea()" class="btn-stop">Încheie Sesiunea</button>
         </div>
     </div>
+    <div id="pagina-statistici" style="display:none; padding: 40px; text-align: center;">
+        <h1 style="font-size: 2.5rem; color: #333;">Raportul tău de Performanță</h1>
+        <p1 class="subtitle2">Iată ce ai lucrat în sesiunile trecute:</p1>
 
+        <div class="tabel-container-pagina">
+            <table id="tabel-stats-complet">
+                <thead>
+                    <tr>
+                        <th>Ora</th>
+                        <th>Operație</th>
+                        <th>✅ Corecte</th>
+                        <th>❌ Greșite</th>
+                        <th>📊 Scor (%)</th>
+                    </tr>
+                </thead>
+                <tbody id="istoric-body">
+                    </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <button onclick="revinoLaMeniu()" class="btn-back">⬅️ Înapoi la Jocuri</button>
+            <button onclick="stergeIstoric()" class="btn-clear-red">Șterge tot istoricul</button>
+        </div>
+    </div>
+    <script src="config.js"></script>
+    
+    <script src="engine.js"></script>
+
+    <script src="ui.js"></script>
+    
+    <script src="menu.js"></script>
+    
+    <script src="stats.js"></script>
+    
     <script src="script.js"></script>
 </body>
 </html>
