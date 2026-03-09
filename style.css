@@ -13,24 +13,42 @@ body {
 
 /* 2. Stilul titlului */
 h1 {
-    color: #2c3e50;
-    margin-bottom: 10px;
-    font-size: 2.5rem;
+    font-size: 3.5rem; /* Îl facem mai mare și impunător */
+    margin-top: 30px;
+    margin-bottom: 40px;
+    font-weight: 900;
+    text-transform: uppercase; /* Litere mari pentru impact */
+    
+    /* EFECT DE GRADIENT PE TEXT */
+    background: linear-gradient(45deg, #2c3e50, #4ca1af);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* UMBRĂ TEXT (îi dă profunzime) */
+    text-shadow: 2px 4px 10px rgba(0,0,0,0.1);
+    
 }
 
-p {
-    margin-bottom: 10px; /* Scoatem marginile implicite ca să avem control total */
+.subtitle-container {
+    margin-bottom: 15px; /* Creează spațiul acela de care vorbeam mai devreme */
 }
 
 .subtitle {
-    color: #546e7a;
-    font-size: 1.2rem;
-    margin-bottom: 40px;
-    font-weight: 300;
-    letter-spacing: 1px;
-    position: relative;
     display: inline-block;
+    margin-top: 15px;
+    padding: 12px 30px;
+    background: rgba(255, 255, 255, 0.7); /* Efect de sticlă */
+    backdrop-filter: blur(10px); /* Încețoșează fundalul din spate */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 100px;
+    color: #444;
+    font-size: 1.1rem;
+    font-weight: 500;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    color: #555;
 }
+
+
 
 /* Containerul care ține toate cardurile */
 .meniu-principal {
@@ -186,4 +204,71 @@ p {
     font-size: 36px;
     text-decoration: none;
     color: #2c3e50;
+}
+
+.score-container {
+    background: #fff9c4; /* Un galben pastelat ca o steluță */
+    border: 2px solid #fbc02d;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 0 #f9a825; /* Efect 3D și la scor */
+}
+
+#scor-valoare {
+    color: #e65100;
+    margin-left: 5px;
+}
+
+#statistici-section {
+    padding: 20px;
+    color: white;
+}
+
+.table-wrapper {
+    margin-top: 15px;
+    max-height: 300px;
+    overflow-y: auto; /* Scroll dacă sunt multe sesiuni */
+    border: 1px solid #444;
+}
+
+#tabel-statistici {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+#tabel-statistici th, #tabel-statistici td {
+    padding: 10px 5px;
+    border-bottom: 1px solid #333;
+    text-align: center;
+}
+
+#tabel-statistici th {
+    background-color: #222;
+    position: sticky; /* Capul tabelului rămâne sus la scroll */
+    top: 0;
+}
+
+.btn-stop {
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-clear {
+    margin-top: 20px;
+    background: transparent;
+    color: #ff4757;
+    border: 1px solid #ff4757;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
 }

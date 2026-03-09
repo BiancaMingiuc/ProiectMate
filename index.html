@@ -16,17 +16,36 @@
     <div id="sidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
         <div class="sidebar-content">
-            <h2>Meniu Jocuri</h2>
+            <h2>Meniu</h2>
             <hr>
-            <button onclick="switchCategory('arcade')">🎮 Jocuri Arcade</button>
-            <button onclick="switchCategory('stats')">📊 Statistici</button>
-            <button onclick="location.reload()">🏠 Pagina Principală</button>
+            <button onclick="switchCategory('arcade')">Games 🎮</button>
+            <button onclick="afiseazaStatistici()">Stats 📈</button>
+            <button onclick="location.reload()">Home 🏠</button>
+
+            <div id="zona-statistici" style="display:none; margin-top: 20px;">
+                <h3 style="color: white; font-size: 1rem;">Istoric Sesiuni</h3>
+                <table id="tabel-stats" style="width: 100%; color: white; border-collapse: collapse; font-size: 0.8rem;">
+                    <thead>
+                        <tr style="border-bottom: 1px solid #555;">
+                            <th>Ora</th>
+                            <th>Tip</th>
+                            <th>✅</th>
+                            <th>❌</th>
+                        </tr>
+                    </thead>
+                    <tbody id="istoric-body"></tbody>
+                </table>
+                <button onclick="stergeIstoric()" style="background: none; border: 1px solid red; color: red; margin-top: 10px; font-size: 0.7rem;">Golește</button>
+            </div>
         </div>
     </div>
 
-    <div class="header">
+    <div class="header header-container">
         <h1>Academia de Mate</h1>
-        <p>Alege ce vrei sa exersezi astazi:</p>
+    </div>
+
+    <div class="subtitle-container">
+        <p class="subtitle">Alege misiunea ta de astăzi:</p>
     </div>
 
     <div class="meniu-principal">
@@ -37,14 +56,24 @@
     </div>
 
     <div id="zona-exercitiu" style="display:none;">
-        <h2 id="operatie-titlu">Adunari</h2>
+        <div class="scor-container">
+            ✅ Corecte: <span id="scor-corecte">0</span> | 
+            ❌ Greșite: <span id="scor-gresite">0</span>
+        </div>
+        
+        <h2 id="operatie-titlu">Misiune activa</h2>
+        
         <div class="display-calcul">
             <span id="num1">0</span> 
             <span id="operator">+</span> 
             <span id="num2">0</span> = 
             <input type="number" id="raspuns">
         </div>
-        <button onclick="verifica()" class="btn-trimite">Verifica!</button>
+
+        <div class="control-joc">
+            <button onclick="verifica()" class="btn-trimite">Verifică!</button>
+            <button onclick="finalizeazaSesiunea()" class="btn-stop">Încheie Sesiunea</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
