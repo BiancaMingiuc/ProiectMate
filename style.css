@@ -9,6 +9,11 @@ body {
     min-height: 100vh; /* Ocupă toată înălțimea ecranului */
     background-color: #f0f7ff; /* Un albastru foarte deschis, relaxant */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    justify-content: flex-start;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 /* 2. Stilul titlului */
@@ -447,4 +452,169 @@ input[type=number] {
     border-bottom: 5px solid #4a90e2; /* O dungă colorată sub text */
     min-width: 250px;
     text-align: center;
+}
+
+/*notificare*/
+.toast-container {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.notificare-telefon {
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px; /* Formă de pastilă */
+    font-size: 0.95rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.5s ease;
+    animation: n-aparitie-sus 0.4s ease-out forwards;
+    transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease !important;
+    white-space: nowrap;
+}
+
+.dispare-toast {
+    opacity: 0 !important;
+    transform: translateY(-20px) scale(0.8) !important;
+    filter: blur(4px); 
+}
+
+@keyframes n-aparitie-sus {
+    from { 
+        opacity: 0; 
+        transform: translateY(-50px); /* Vine de "peste" marginea de sus */
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 2rem; }
+    .card { width: 140px; height: 200px; }
+    .mixt { max-width: 300px !important; height: auto !important; padding: 20px !important; }
+    .display-calcul { font-size: 3rem; }
+    #raspuns { width: 120px; font-size: 2rem; }
+}
+
+.live-score-board {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.score-item {
+    background: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+}
+
+#scor-corecte { color: #2e7d32; } /* Verde pentru corecte */
+#scor-gresite { color: #c62828; }  /* Roșu pentru greșite */
+
+.overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #6e8efb, #a777e3); /* Gradient frumos */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999; /* Peste orice altceva */
+    transition: opacity 0.5s ease;
+}
+
+.welcome-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    max-width: 90%;
+    width: 400px;
+}
+
+.welcome-card h2 { color: #333; margin-bottom: 10px; }
+.welcome-card p { color: #383737; margin-bottom: 20px; }
+
+#nume-start {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    box-sizing: border-box; /* Să nu iasă din card */
+}
+
+.btn-start {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+}
+
+#pagina-jocuri {
+    padding: 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+.grid-jocuri {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.card-joc.special {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-bottom: 5px solid #ddd;
+}
+
+.card-joc.special:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* Culori diferite pentru jocuri */
+.bingo { border-color: #ff9800; }
+.runner { border-color: #2196f3; }
+.jump { border-color: #4caf50; }
+
+.header-jocuri {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.btn-back {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background: #eee;
+    cursor: pointer;
 }

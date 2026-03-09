@@ -75,9 +75,20 @@ function executaGenerare(tip) {
     const elementTitlu = document.getElementById('titlu-operatie');
     
     if (tip === 'mixt') {
-        const optiuni = ['adunare', 'scadere', 'inmultire'];
-        const indexAleator = Math.floor(Math.random() * optiuni.length);
-        tipEfectiv = optiuni[indexAleator];
+        const optiuni = ['adunare', 'scadere', 'inmultire', 'impartire'];
+        tipEfectiv = optiuni[Math.floor(Math.random() * optiuni.length)];
+        
+        // Titlul va arăta și ce operație a picat la zar
+        if (elementTitlu) {
+            elementTitlu.innerText = "MIXTE: " + tipEfectiv.toUpperCase();
+            elementTitlu.style.color = "#764ba2"; // Culoare specială pentru mixt
+        }
+    } else {
+        // 2. Dacă e un mod fix, scriem exact numele operației
+        if (elementTitlu) {
+            elementTitlu.innerText = tip.toUpperCase();
+            elementTitlu.style.color = "#2c3e50"; // Culoare normală
+        }
     }
 
     switch(tipEfectiv){
@@ -96,4 +107,18 @@ function executaGenerare(tip) {
         default:
             console.error("tip necunoscut " + tipEfectiv);
         }
+}
+
+
+//BINGO
+function startBingo() {
+    // Curățăm ecranele anterioare
+    document.getElementById('pagina-jocuri').style.display = 'none';
+    document.getElementById('zona-exercitiu').style.display = 'block';
+    
+    // Schimbăm titlul și pregătim logica specială de Bingo
+    document.getElementById('titlu-operatie').innerText = "MATH BINGO";
+    
+    // Aici va veni logica de generare a tabelei 3x3 pe care am discutat-o
+    genereazaRundaBingo();
 }

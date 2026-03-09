@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="welcome-overlay" class="overlay">
+        <div class="welcome-card">
+            <h2>Salutare!</h2>
+            <p>Introdu numele tau pentru a începe: </p>
+            <input type="text" id="nume-start" placeholder="Numele tău aici...">
+            <button onclick="incepeAventura()" class="btn-start">Start</button>
+        </div>
+    </div>
     <div id="menu-icon" onclick="toggleSidebar()">
         <span></span>
         <span></span>
@@ -44,6 +52,10 @@
     </div>
 
     <div id="zona-exercitiu" style="display:none;">
+        <div class="live-score-board">
+            <div class="score-item">✅ <span id="scor-corecte">0</span></div>
+            <div class="score-item">❌ <span id="scor-gresite">0</span></div>
+        </div>
         <h2 id="titlu-operatie" class="titlu-misiune">ADUNARE</h2>
         <div class="display-calcul">
             <span id="num1">0</span> 
@@ -67,6 +79,7 @@
                 <thead>
                     <tr>
                         <th>Ora</th>
+                        <th>Nume</th>
                         <th>Operație</th>
                         <th>✅ Corecte</th>
                         <th>❌ Greșite</th>
@@ -79,10 +92,42 @@
         </div>
 
         <div style="margin-top: 30px;">
-            <button onclick="revinoLaMeniu()" class="btn-back">⬅️ Înapoi la Jocuri</button>
+            <button onclick="revinoLaMeniu()" class="btn-back">⬅️ Înapoi la Pagina principala</button>
             <button onclick="stergeIstoric()" class="btn-clear-red">Șterge tot istoricul</button>
         </div>
     </div>
+
+    <div id="pagina-jocuri" style="display: none;">
+        <div class="header-jocuri">
+            <button onclick="revinoLaMeniu()" class="btn-back">⬅ Înapoi</button>
+            <h2>Alege jocul! </h2>
+        </div>
+
+        <div class="grid-jocuri">
+            <div class="card-joc special bingo" onclick="startBingo()">
+                <div class="icon">🔢</div>
+                <h3>Math Bingo</h3>
+                <p>Completează linia!</p>
+            </div>
+
+            <div class="card-joc special runner" onclick="startRunner()">
+                <div class="icon">🏃</div>
+                <h3>Math Runner</h3>
+                <p>Fugi și calculează!</p>
+            </div>
+
+            <div class="card-joc special jump" onclick="startJump()">
+                <div class="icon">🐸</div>
+                <h3>Wood Jump</h3>
+                <p>Sari pe placa corectă!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <div id="toast-container" class="toast-container"></div>
+
     <script src="config.js"></script>
     
     <script src="engine.js"></script>
@@ -94,5 +139,6 @@
     <script src="stats.js"></script>
     
     <script src="script.js"></script>
+
 </body>
 </html>
