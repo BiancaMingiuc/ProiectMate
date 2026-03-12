@@ -20,7 +20,7 @@ body {
    STILUL PENTRU LAPTOP / ECRANE MARI
    ========================================= */
 h1.meniu-titlu {
-    font-size: 5rem; /* Aici decizi cât de MARE să fie pe laptop! Poți schimba în 2.5rem sau 4rem */
+    font-size: 4.5rem; /* Aici decizi cât de MARE să fie pe laptop! Poți schimba în 2.5rem sau 4rem */
     text-align: center;
     margin: 30px auto 40px auto;
     font-weight: 900;
@@ -35,6 +35,9 @@ h1.meniu-titlu {
     text-shadow: 2px 4px 10px rgba(0,0,0,0.1);
 }
 
+h1.titlu-raport {
+    font-size: 3.5rem;
+}
 
 /* =========================================
    STILUL DOAR PENTRU TELEFON (Media Query)
@@ -48,6 +51,17 @@ h1.meniu-titlu {
         padding: 0 10px !important;
         white-space: normal !important;
         word-wrap: break-word !important; /* Forțează ruperea cuvântului PERFORMANȚĂ */
+    }
+
+    h1.titlu-raport {
+        font-size: 2.2rem !important; /* Îl facem mai mare și vizibil (nu mai e dependent de vw) */
+        line-height: 1.2 !important;  /* Lăsăm puțin aer între cele 2-3 rânduri */
+        white-space: normal !important; /* Îi dăm voie liberă să treacă pe rândul următor */
+        word-wrap: break-word !important; 
+        padding: 0 15px !important;
+        
+        /* Centrarea textului pe rândurile multiple */
+        text-align: center !important; 
     }
 }
 
@@ -903,18 +917,3 @@ input[type=number] {
     color: #6366f1;
 }
 
-/* --- REPARARE TITLU STATISTICI (RAPORT) PENTRU TELEFON --- */
-#pagina-statistici .meniu-titlu {
-    white-space: normal;       /* Îi dă voie să treacă pe rândul următor */
-    word-wrap: break-word;     /* Forțează ruperea cuvintelor lungi ca "PERFORMANȚĂ" */
-    overflow-wrap: break-word; 
-}
-
-@media (max-width: 600px) {
-    #pagina-statistici .meniu-titlu {
-        /* Adăugăm !important ca să batem acel 2.5rem scris direct în HTML */
-        font-size: 1.8rem; 
-        line-height: 1.3 !important;
-        padding: 0 10px;
-    }
-}
