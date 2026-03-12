@@ -57,7 +57,7 @@ h1.titlu-raport {
     }
 
     h1.titlu-raport {
-        font-size: 2.2rem !important; /* Îl facem mai mare și vizibil (nu mai e dependent de vw) */
+        font-size: 2rem !important; /* Îl facem mai mare și vizibil (nu mai e dependent de vw) */
         line-height: 1.2 !important;  /* Lăsăm puțin aer între cele 2-3 rânduri */
         white-space: normal !important; /* Îi dăm voie liberă să treacă pe rândul următor */
         word-wrap: break-word !important; 
@@ -343,7 +343,24 @@ h1.titlu-raport {
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     max-width: 1000px;
     margin: 0 auto;
-    overflow-x: auto;
+    width: 100%;
+    overflow-x: auto; /* Asta creează scroll-ul orizontal doar dacă e nevoie */
+    -webkit-overflow-scrolling: touch; /* Face scroll-ul foarte lin pe iPhone/Android */
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.tabel-container-pagina table {
+    width: 100%;
+    min-width: 500px; /* Asta obligă tabelul să rămână lat, forțând containerul să facă scroll! */
+    border-collapse: collapse;
+}
+
+
+@media (max-width: 600px) {
+    .tabel-container-pagina {
+        padding: 10px; 
+    }
 }
 
 #tabel-stats-complet {
