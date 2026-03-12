@@ -2,6 +2,13 @@
 body {
     margin: 0;
     padding: 0;
+
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
     display: flex;
     flex-direction: column;
     align-items: center; /* Centrează pe orizontală */
@@ -361,20 +368,27 @@ h1.titlu-raport {
     .tabel-container-pagina {
         padding: 10px; 
     }
-    /* --- REPARARE TABELE PENTRU TELEFON --- */
     
-    /* 1. Micșorăm masiv textul și distanțele din interiorul tabelului */
-    #tabel-stats-complet, 
-    #tabel-statistici {
-        font-size: 0.9rem !important; 
+    /* 1. Anulăm acel padding uriaș de 40px din HTML care ne strivește tabelul */
+    #pagina-statistici {
+        padding: 15px !important; 
+        box-sizing: border-box !important;
+        width: 100vw !important;
     }
 
-    #tabel-stats-complet th, 
-    #tabel-stats-complet td,
-    #tabel-statistici th, 
-    #tabel-statistici td {
-        padding: 8px 4px !important; /* De la 20px la doar 8px! */
-        white-space: nowrap !important; /* Forțăm textul să stea pe un rând ca să arate curat */
+    /* 2. Reparam "bula" de text cu "Iată ce ai lucrat..." ca să nu iasă din ecran */
+    .subtitle2 {
+        white-space: normal !important; 
+        padding: 10px 15px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 3. Punem butoanele de la final unul sub altul, elegante, pe tot ecranul */
+    .btn-back, .btn-clear-red {
+        display: block !important;
+        width: 100% !important;
+        margin: 15px 0 !important; /* Spațiu între ele */
     }
 
     /* 2. Asigurăm forțat scroll-ul orizontal pe ambele containere de tabele pe care le ai */
@@ -386,6 +400,19 @@ h1.titlu-raport {
         -webkit-overflow-scrolling: touch !important; /* Scroll fin pe mobil */
         box-sizing: border-box !important;
         border-radius: 10px !important;
+    }
+
+    #tabel-stats-complet, 
+    #tabel-statistici {
+        font-size: 0.9rem !important; 
+    }
+
+    #tabel-stats-complet th, 
+    #tabel-stats-complet td,
+    #tabel-statistici th, 
+    #tabel-statistici td {
+        padding: 8px 4px !important; /* De la 20px am redus la 8px! */
+        white-space: nowrap !important; /* Forțăm textul să stea pe un rând */
     }
 }
 
