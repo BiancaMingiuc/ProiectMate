@@ -896,3 +896,19 @@ input[type=number] {
 .game-row:hover .game-arrow {
     color: #6366f1;
 }
+
+/* --- REPARARE TITLU STATISTICI (RAPORT) PENTRU TELEFON --- */
+#pagina-statistici .meniu-titlu {
+    white-space: normal;       /* Îi dă voie să treacă pe rândul următor */
+    word-wrap: break-word;     /* Forțează ruperea cuvintelor lungi ca "PERFORMANȚĂ" */
+    overflow-wrap: break-word; 
+}
+
+@media (max-width: 600px) {
+    #pagina-statistici .meniu-titlu {
+        /* Adăugăm !important ca să batem acel 2.5rem scris direct în HTML */
+        font-size: 1.8rem; 
+        line-height: 1.3 !important;
+        padding: 0 10px;
+    }
+}
