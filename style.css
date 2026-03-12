@@ -32,6 +32,17 @@ h1 {
     /* UMBRĂ TEXT (îi dă profunzime) */
     text-shadow: 2px 4px 10px rgba(0,0,0,0.1);
     
+    text-align: center;
+    width: 100%;            /* Îi spune să folosească toată lățimea ecranului pentru a calcula centrul */
+    padding: 0 15px;        /* Adaugă un mic spațiu stânga-dreapta ca literele să nu se lipească de marginea telefonului */
+    box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+    .meniu-titlu {
+        font-size: 2.2rem; /* Micșorăm puțin textul ca să încapă frumos fără să pară înghesuit */
+        margin-bottom: 20px;
+    }
 }
 
 .subtitle-container {

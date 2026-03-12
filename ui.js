@@ -6,6 +6,7 @@ function startJoc(tip){
     document.querySelector('.header-container').style.display = 'none';
     document.querySelector('.meniu-principal').style.display = 'none';
     document.querySelector('.subtitle-container').style.display = 'none';
+    document.querySelector('pagina-jocuri').style.display = 'none';
     
     // Afișăm zona de lucru
     document.getElementById('zona-exercitiu').style.display = 'block';
