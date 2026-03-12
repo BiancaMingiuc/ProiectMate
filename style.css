@@ -361,6 +361,32 @@ h1.titlu-raport {
     .tabel-container-pagina {
         padding: 10px; 
     }
+    /* --- REPARARE TABELE PENTRU TELEFON --- */
+    
+    /* 1. Micșorăm masiv textul și distanțele din interiorul tabelului */
+    #tabel-stats-complet, 
+    #tabel-statistici {
+        font-size: 0.9rem !important; 
+    }
+
+    #tabel-stats-complet th, 
+    #tabel-stats-complet td,
+    #tabel-statistici th, 
+    #tabel-statistici td {
+        padding: 8px 4px !important; /* De la 20px la doar 8px! */
+        white-space: nowrap !important; /* Forțăm textul să stea pe un rând ca să arate curat */
+    }
+
+    /* 2. Asigurăm forțat scroll-ul orizontal pe ambele containere de tabele pe care le ai */
+    .tabel-container-pagina, 
+    .table-wrapper {
+        width: 100% !important;
+        max-width: 100vw !important; /* Îi interzicem strict să depășească ecranul telefonului */
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important; /* Scroll fin pe mobil */
+        box-sizing: border-box !important;
+        border-radius: 10px !important;
+    }
 }
 
 #tabel-stats-complet {
