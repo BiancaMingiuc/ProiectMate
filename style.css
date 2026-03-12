@@ -373,7 +373,7 @@ h1.titlu-raport {
     #pagina-statistici {
         padding: 15px !important; 
         box-sizing: border-box !important;
-        width: 100vw !important;
+        width: 100% !important;
     }
 
     /* 2. Reparam "bula" de text cu "Iată ce ai lucrat..." ca să nu iasă din ecran */
@@ -395,7 +395,7 @@ h1.titlu-raport {
     .tabel-container-pagina, 
     .table-wrapper {
         width: 100% !important;
-        max-width: 100vw !important; /* Îi interzicem strict să depășească ecranul telefonului */
+        max-width: 100% !important; /* Îi interzicem strict să depășească ecranul telefonului */
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch !important; /* Scroll fin pe mobil */
         box-sizing: border-box !important;
