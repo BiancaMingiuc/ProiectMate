@@ -39,10 +39,13 @@ h1.titlu-raport {
     font-size: 3.5rem;
 }
 
+.doar-telefon {
+    display: none;
+}
+
 /* =========================================
    STILUL DOAR PENTRU TELEFON (Media Query)
    ========================================= */
-/* Orice scriem aici "bate" regulile de mai sus, dar NUMAI dacă ecranul e mai mic de 600px */
 @media (max-width: 600px) {
     h1.meniu-titlu {
         font-size: 8vw !important;    /* Elastic pentru telefon (8% din lățimea ecranului) */
@@ -62,6 +65,10 @@ h1.titlu-raport {
         
         /* Centrarea textului pe rândurile multiple */
         text-align: center !important; 
+    }
+
+    .doar-telefon {
+        display: block !important; /* Activează tăierea rândului pe telefon */
     }
 }
 
