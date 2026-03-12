@@ -49,7 +49,6 @@ function genereazaInmultire(){
 }
 
 function genereazaImpartire() {
-    // Pas 1 & 2: Alegem numerele "mici"
     let rezultatAsteptat = genereazaRandom(1, 10);
     numar2 = genereazaRandom(1, 10); // Împărțitorul
     
@@ -107,18 +106,4 @@ function executaGenerare(tip) {
         default:
             console.error("tip necunoscut " + tipEfectiv);
         }
-}
-
-
-//BINGO
-function startBingo() {
-    // Curățăm ecranele anterioare
-    document.getElementById('pagina-jocuri').style.display = 'none';
-    document.getElementById('zona-exercitiu').style.display = 'block';
-    
-    // Schimbăm titlul și pregătim logica specială de Bingo
-    document.getElementById('titlu-operatie').innerText = "MATH BINGO";
-    
-    // Aici va veni logica de generare a tabelei 3x3 pe care am discutat-o
-    genereazaRundaBingo();
 }

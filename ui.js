@@ -10,11 +10,9 @@ function startJoc(tip){
     // Afișăm zona de lucru
     document.getElementById('zona-exercitiu').style.display = 'block';
     
-    // Încărcăm scorul utilizatorului
-    actualizeazaAfisajScor();
-
     executaGenerare(tip);
 
+    actualizeazaAfisajScor();
 }
 
 
@@ -102,7 +100,7 @@ function incepeAventura() {
         overlay.style.display = 'none';
     }, 500);
 
-    showToast(`Succes, ${nume}! Alege o operație.`);
+    showToast(`Succes, ${nume}!`);
 }
 
 // Dacă vrem să-l sărim pe viitor dacă numele există deja:
@@ -113,3 +111,5 @@ window.addEventListener('load', () => {
         document.getElementById('welcome-overlay').style.display = 'none';
     }
 });
+
+

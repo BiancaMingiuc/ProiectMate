@@ -5,20 +5,6 @@ const SUPABASE_KEY = 'sb_publishable_8f72yEWJ4IhgqsMYwOLKZA_GDHHpQI6';
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 //TABEL STATISTICI
 
-function afiseazaStatistici() {
-    // Închidem sidebar-ul
-    toggleSidebar();
-
-    // 1. Ascundem tot restul
-    document.querySelector('.header').style.display = 'none';
-    document.querySelector('.subtitle-container').style.display = 'none';
-    document.querySelector('.meniu-principal').style.display = 'none';
-    document.getElementById('zona-exercitiu').style.display = 'none';
-
-    // 2. Afișăm pagina de statistici
-    document.getElementById('pagina-statistici').style.display = 'block';
-}
-
 
 // 2. Funcția ta modificată
 async function finalizeazaSesiunea() {
@@ -45,7 +31,6 @@ async function finalizeazaSesiunea() {
     if (error) {
         console.error("Eroare la salvarea în Cloud:", error);
     }
-    // -----------------------------------------------
 
     const tbody = document.getElementById('istoric-body');
     if (!tbody) return;
@@ -60,7 +45,7 @@ async function finalizeazaSesiunea() {
 
     // Adăugăm coloanele (Atenție: am adăugat coloana pentru NUME dacă ai modificat tabelul HTML)
     rand.insertCell(0).innerText = ora;
-    rand.insertCell(1).innerText = numeSalvat // Adăugat pentru a vedea cine a lucrat
+    rand.insertCell(1).innerText = numeSalvat 
     rand.insertCell(2).innerText = tipCurent.toUpperCase();
     rand.insertCell(3).innerText = corecte;
     rand.insertCell(4).innerText = gresite;

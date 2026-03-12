@@ -11,7 +11,7 @@
         <div class="welcome-card">
             <h2>Salutare!</h2>
             <p>Introdu numele tau pentru a începe: </p>
-            <input type="text" id="nume-start" placeholder="Numele tău aici...">
+            <input type="text" id="nume-start" placeholder="Numele tau aici...">
             <button onclick="incepeAventura()" class="btn-start">Start</button>
         </div>
     </div>
@@ -27,9 +27,8 @@
             <h2>Meniu</h2>
             <hr>
             <button onclick="switchCategory('arcade')">Games 🎮</button>
-            <button onclick="afiseazaStatistici()">Stats 📈</button>
-            <button onclick="location.reload()">Home 🏠</button>
-
+            <button onclick="switchCategory('stats')">Stats 📈</button>
+            <button onclick="switchCategory('home')">Home 🏠</button>
         </div>
     </div>
 
@@ -70,6 +69,7 @@
             <button onclick="finalizeazaSesiunea()" class="btn-stop">Încheie Sesiunea</button>
         </div>
     </div>
+
     <div id="pagina-statistici" style="display:none; padding: 40px; text-align: center;">
         <h1 style="font-size: 2.5rem; color: #333;">Raportul tău de Performanță</h1>
         <p1 class="subtitle2">Iată ce ai lucrat în sesiunile trecute:</p1>
@@ -97,29 +97,76 @@
         </div>
     </div>
 
-    <div id="pagina-jocuri" style="display: none;">
-        <div class="header-jocuri">
-            <button onclick="revinoLaMeniu()" class="btn-back">⬅ Înapoi</button>
-            <h2>Alege jocul! </h2>
+    <div id="pagina-jocuri" class="menu-container">
+        <h2 class="meniu-titlu">ALEGE JOCUL</h2>
+
+            <div class="game-row" onclick="startBingo()">
+            <div class="game-image-box">
+                <img src="bingo.jpeg" alt="Bingo"> </div>
+            <div class="game-info">
+                <h3>Math Bingo</h3>
+                <p>Completează linia și câștigă trofeul!</p>
+            </div>
+            <div class="game-arrow">➔</div>
         </div>
 
-        <div class="grid-jocuri">
-            <div class="card-joc special bingo" onclick="startBingo()">
-                <div class="icon">🔢</div>
-                <h3>Math Bingo</h3>
-                <p>Completează linia!</p>
+        <div class="game-row" onclick="startRunner()">
+            <div class="game-image-box">
+                <img src="runner.jpeg" alt="Runner">
             </div>
-
-            <div class="card-joc special runner" onclick="startRunner()">
-                <div class="icon">🏃</div>
+            <div class="game-info">
                 <h3>Math Runner</h3>
-                <p>Fugi și calculează!</p>
+                <p>Fugi rapid și calculează din mers!</p>
             </div>
+            <div class="game-arrow">➔</div>
+        </div>
 
-            <div class="card-joc special jump" onclick="startJump()">
-                <div class="icon">🐸</div>
+        <div class="game-row" onclick="startWoodJump()">
+            <div class="game-image-box">
+                <img src="jump.jpeg" alt="Wood Jump">
+            </div>
+            <div class="game-info">
                 <h3>Wood Jump</h3>
-                <p>Sari pe placa corectă!</p>
+                <p>Sari pe placa corectă cu broscuța!</p>
+            </div>
+            <div class="game-arrow">➔</div>
+        </div>
+    </div>
+
+    <div id="pagina-jocuri" style="display: none;">
+        </div>
+
+    <div id="bingo-wrapper" style="display: none; text-align: center; padding: 20px;">
+        
+        <div id="bingo-selectie-categorie">
+            <h2 class="titlu-misiune">MATH BINGO</h2>
+            <p>Ce vrei să exersezi astăzi?</p>
+            <div class="optiuni-categorie">
+                <button class="btn-categorie" onclick="initiazaBingo('inmultire')">Înmulțiri ✖️</button>
+                <button class="btn-categorie" onclick="initiazaBingo('impartire')">Împărțiri ➗</button>
+            </div>
+            <button onclick="switchCategory('arcade')" class="btn-back mt-20">⬅ Înapoi la Jocuri</button>
+        </div>
+
+        <div id="bingo-joc-activ" style="display: none;">
+            <div id="bingo-intrebare" class="bingo-header">
+                Găsește rezultatul: <span id="operatie-bingo" class="highlight-operatie">...</span>
+            </div>
+            
+            <div id="bingo-grid" class="bingo-grid">
+                </div>
+
+            <button onclick="finalizeazaSesiunea()" class="btn-stop mt-20">Încheie Jocul</button>
+        </div>
+    </div>
+
+    <div id="modal-bingo" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <h1>🎉 BINGO! 🎉</h1>
+            <p>Felicitări! Ai completat o linie!</p>
+            <div class="modal-buttons">
+                <button onclick="reincepeBingo()" class="btn-modal play">Joacă din nou</button>
+                <button onclick="inchideSesiuneaBingo()" class="btn-modal menu">Meniu Jocuri</button>
             </div>
         </div>
     </div>
@@ -137,6 +184,8 @@
     <script src="menu.js"></script>
     
     <script src="stats.js"></script>
+
+    <script src="games.js"></script>
     
     <script src="script.js"></script>
 
