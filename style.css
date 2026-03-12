@@ -17,7 +17,7 @@ body {
 }
 
 /* 2. Stilul titlului */
-h1 {
+.meniu-titlu {
     font-size: 3.5rem; /* Îl facem mai mare și impunător */
     margin-top: 30px;
     margin-bottom: 40px;
