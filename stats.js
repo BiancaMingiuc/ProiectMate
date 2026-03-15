@@ -43,7 +43,6 @@ async function finalizeazaSesiunea() {
     const total = corecte + gresite;
     const procent = Math.round((corecte / total) * 100) + "%";
 
-    // Adăugăm coloanele (Atenție: am adăugat coloana pentru NUME dacă ai modificat tabelul HTML)
     rand.insertCell(0).innerText = ora;
     rand.insertCell(1).innerText = numeSalvat 
     rand.insertCell(2).innerText = tipCurent.toUpperCase();

@@ -180,6 +180,9 @@ function reincepeBingo() {
 function inchideSesiuneaBingo() {
     console.log("Ne întoarcem la meniu..."); // Linie pentru test
     // 1. Ascundem fereastra de Bingo și tot wrapper-ul de joc
+    tipCurent = "Bingo: " + tipBingoCurent;
+    finalizeazaSesiunea();
+
     document.getElementById('modal-bingo').style.display = 'none';
     document.getElementById('bingo-wrapper').style.display = 'none';
     
