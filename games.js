@@ -111,7 +111,7 @@ function verificaRaspunsBingo(valoareAleasa, index, butonHtml) {
             document.getElementById('modal-bingo').style.display = 'flex';
         } else {
             // DACĂ NU E BINGO, SCHIMBĂM ÎNTREBAREA după o mică pauză (0.5 secunde)
-            setTimeout(genereazaIntrebareNoua, 500); 
+            setTimeout(genereazaIntrebareNoua, 400); 
         }
 
     } else {
