@@ -32,7 +32,7 @@ function switchCategory(category) {
     else if (category === 'home') {
         document.querySelector('.header').style.display = 'block';
         document.querySelector('.subtitle-container').style.display = 'block';
-        document.querySelector('.meniu-principal').style.display = 'flex'; // Atenție: flex, nu block pentru meniul principal
+        document.querySelector('.meniu-principal').style.display = 'flex'; 
     }
 
     // 3. Închidem meniul lateral la final, indiferent pe ce am dat click

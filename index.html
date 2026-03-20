@@ -10,7 +10,7 @@
     <div id="welcome-overlay" class="overlay">
         <div class="welcome-card">
             <h2>Salutare!</h2>
-            <p>Introdu numele tau pentru a începe: </p>
+            <p>Introdu numele tau pentru a incepe: </p>
             <input type="text" id="nume-start" placeholder="Numele tau aici...">
             <button onclick="incepeAventura()" class="btn-start">Start</button>
         </div>
@@ -66,7 +66,7 @@
         <div id="feedback-mesaj" style="min-height: 30px; margin-top: 10px; font-weight: bold; font-size: 1.2rem;"></div>
         
         <div class="control-joc">
-            <button onclick="finalizeazaSesiunea()" class="btn-stop">Încheie Sesiunea</button>
+            <button onclick="finalizeazaSesiunea()" class="btn-stop">Incheie Sesiunea</button>
         </div>
     </div>
 
@@ -80,9 +80,9 @@
                     <tr>
                         <th>Ora</th>
                         <th>Nume</th>
-                        <th>Operație</th>
+                        <th>Operatie</th>
                         <th>✅ Corecte</th>
-                        <th>❌ Greșite</th>
+                        <th>❌ Gresite</th>
                         <th>📊 Scor (%)</th>
                     </tr>
                 </thead>
@@ -92,8 +92,8 @@
         </div>
 
         <div style="margin-top: 30px;">
-            <button onclick="revinoLaMeniu()" class="btn-back">⬅️ Înapoi la Pagina principala</button>
-            <button onclick="stergeIstoric()" class="btn-clear-red">Șterge tot istoricul</button>
+            <button onclick="revinoLaMeniu()" class="btn-back">⬅️ Inapoi la Pagina principala</button>
+            <button onclick="stergeIstoric()" class="btn-clear-red">Sterge tot istoricul</button>
         </div>
     </div>
 
@@ -105,7 +105,7 @@
                 <img src="bingo.jpeg" alt="Bingo"> </div>
             <div class="game-info">
                 <h3>Math Bingo</h3>
-                <p>Completează linia și câștigă trofeul!</p>
+                <p>Completeaza linia și castiga trofeul!</p>
             </div>
             <div class="game-arrow">➔</div>
         </div>
@@ -116,7 +116,7 @@
             </div>
             <div class="game-info">
                 <h3>Math Runner</h3>
-                <p>Fugi rapid și calculează din mers!</p>
+                <p>Fugi rapid si calculeaza din mers!</p>
             </div>
             <div class="game-arrow">➔</div>
         </div>
@@ -127,7 +127,7 @@
             </div>
             <div class="game-info">
                 <h3>Wood Jump</h3>
-                <p>Sari pe placa corectă cu broscuța!</p>
+                <p>Sari pe placa corecta cu broscuta!</p>
             </div>
             <div class="game-arrow">➔</div>
         </div>
@@ -140,34 +140,56 @@
         
         <div id="bingo-selectie-categorie">
             <h2 class="titlu-misiune">MATH BINGO</h2>
-            <p>Ce vrei să exersezi astăzi?</p>
+            <p>Ce vrei sa exersezi astazi?</p>
             <div class="optiuni-categorie">
-                <button class="btn-categorie" onclick="initiazaBingo('inmultire')">Înmulțiri ✖️</button>
-                <button class="btn-categorie" onclick="initiazaBingo('impartire')">Împărțiri ➗</button>
+                <button class="btn-categorie" onclick="initiazaBingo('inmultire')">Inmultiri ✖️</button>
+                <button class="btn-categorie" onclick="initiazaBingo('impartire')">Impartiri ➗</button>
             </div>
-            <button onclick="switchCategory('arcade')" class="btn-back mt-20">⬅ Înapoi la Jocuri</button>
+            <button onclick="switchCategory('arcade')" class="btn-back mt-20">⬅ Inapoi la Jocuri</button>
         </div>
 
         <div id="bingo-joc-activ" style="display: none;">
             <div id="bingo-intrebare" class="bingo-header">
-                Găsește rezultatul: <span id="operatie-bingo" class="highlight-operatie">...</span>
+                Gaseste rezultatul: <span id="operatie-bingo" class="highlight-operatie">...</span>
             </div>
             
             <div id="bingo-grid" class="bingo-grid">
-                </div>
+            </div>
 
-            <button onclick="finalizeazaSesiunea()" class="btn-stop mt-20">Încheie Jocul</button>
+            <button onclick="finalizeazaSesiunea()" class="btn-stop mt-20">Incheie Jocul</button>
         </div>
     </div>
 
     <div id="modal-bingo" class="modal-overlay" style="display: none;">
         <div class="modal-content">
             <h1>🎉 BINGO! 🎉</h1>
-            <p>Felicitări! Ai completat o linie!</p>
+            <p>Felicitari! Ai completat o linie!</p>
             <div class="modal-buttons">
-                <button onclick="reincepeBingo()" class="btn-modal play">Joacă din nou</button>
+                <button onclick="reincepeBingo()" class="btn-modal play">Joaca din nou</button>
                 <button onclick="inchideSesiuneaBingo()" class="btn-modal menu">Meniu Jocuri</button>
             </div>
+        </div>
+    </div>
+
+    <div id="woodjump-wrapper" style="display: none;">
+        <div class="header-jocuri">
+            <button class="btn-back" onclick="inchideSesiuneaWoodJump()">⬅ Meniu</button>
+            <div class="score-container" style="margin-bottom: 0;">
+                Scor: <span id="scor-valoare-wood">0</span>
+            </div>
+        </div>
+
+        <div class="titlu-container-joc">
+            <div id="operatie-woodjump">Pregătește-te de săritură!</div>
+        </div>
+
+        <div id="padure-container" 
+            ontouchmove="gliseazaPersonaj(event)"
+            onmousemove="gliseazaPersonaj(event)">
+         
+            <div id="platforme-container"></div>
+        
+            <div id="personaj-wood">🥷</div> 
         </div>
     </div>
 
@@ -186,6 +208,8 @@
     <script src="stats.js"></script>
 
     <script src="games.js"></script>
+
+    <script src="woodjump.js"></script>
     
     <script src="script.js"></script>
 

@@ -14,7 +14,7 @@ function startBingo() {
 
 function initiazaBingo(tip){
     tipBingoCurent = tip;
-    tipCurent = "BINGO: " +tip.toUpperCase;
+    //tipCurent = "BINGO: " + tip.toUpperCase;
     celuleBingo = [];
     dimensiuneGrid = (tip === 'inmultire') ? 5 : 3;
     let totalCelule = dimensiuneGrid * dimensiuneGrid;
@@ -110,7 +110,6 @@ function verificaRaspunsBingo(valoareAleasa, index, butonHtml) {
             // Dacă am făcut Bingo, afișăm direct fereastra mare
             document.getElementById('modal-bingo').style.display = 'flex';
         } else {
-            // DACĂ NU E BINGO, SCHIMBĂM ÎNTREBAREA după o mică pauză (0.5 secunde)
             setTimeout(genereazaIntrebareNoua, 400); 
         }
 
@@ -124,8 +123,6 @@ function verificaRaspunsBingo(valoareAleasa, index, butonHtml) {
         celuleBingo[index].stare = 'rosu'; 
         gresite++;
         
-        // IMPORTANT: Aici NU apelăm genereazaIntrebareNoua. 
-        // Lăsăm întrebarea neschimbată pentru ca elevul să o caute în altă parte.
     }
 }
 
@@ -180,11 +177,13 @@ function reincepeBingo() {
 function inchideSesiuneaBingo() {
     console.log("Ne întoarcem la meniu..."); // Linie pentru test
     // 1. Ascundem fereastra de Bingo și tot wrapper-ul de joc
-    tipCurent = "Bingo: " + tipBingoCurent;
+    tipCurent = "BINGO: " + tipBingoCurent.toUpperCase();
+
     finalizeazaSesiunea();
 
     document.getElementById('modal-bingo').style.display = 'none';
     document.getElementById('bingo-wrapper').style.display = 'none';
+    document.getElementById('meniu-principal').style.display = 'none';
     
     // 2. Arătăm din nou meniul principal de jocuri
     document.getElementById('pagina-jocuri').style.display = 'block';
