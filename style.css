@@ -1009,54 +1009,69 @@ input[type=number] {
     border-bottom: 5px solid #4caf50;
 }
 
+/* 1. Oprește deformarea ecranului și fixează înălțimea jocului */
 #padure-container {
+    position: relative;
     width: 100%;
-    
-    max-width: 600px;    /* Mult mai lat pe laptop (înainte era 400px) */
-    height: 65vh;        /* Ocupă 65% din înălțimea ecranului vizibil */
-    min-height: 500px;   /* Ne asigurăm că nu se face prea mic pe telefoane scurte */
-    
-    /* Restul designului rămâne la fel: */
-    margin: 20px auto;
-    background: linear-gradient(to bottom, #87CEEB 0%, #a8e6cf 100%);
-    border-radius: 20px;
-    position: relative; 
-    overflow: hidden; 
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.1), 0 10px 30px rgba(0,0,0,0.15);
-    border: 4px solid #fff;
-    touch-action: none; 
+    height: 400px; /* Acum broasca știe exact cât spațiu are să sară! Poți schimba la 500px dacă vrei mai mare */
+    overflow: hidden; /* Ascunde lemnele care cad, oprind ecranul din a se redimensiona */
+    background-color: #4fc3f7; /* O culoare albastră pentru apa/cer (Opțional) */
+    border-radius: 15px; /* Colțuri rotunjite frumoase */
+    margin-top: 20px;
 }
 
-#personaj-wood {
-    font-size: 3.5rem; 
-    position: absolute;
-    bottom: 50px; /* Îl ridicăm puțin de la sol */
-    left: 50%;
-    transform: translateX(-50%); /* Îl ține centrat pe deget */
-    z-index: 10;
-    
-    /* Animația de săritură continuă pe loc */
-    animation: saritura-continua 0.6s infinite alternate ease-in-out;
-}
-
-/* Cum funcționează săritura pe loc: */
-@keyframes saritura-continua {
-    0% { bottom: 20px; transform: translateX(-50%); } /* Atinge jos, se turtește puțin */
-    100% { bottom: 120px; transform: translateX(-50%); } /* Sare sus, se alungește */
-}
-
-/* Platformele de lemn (buștenii) */
+/* 2. Asigură-te că lemnele sunt absolut poziționate */
 .platforma-lemn {
-    width: 120px;
-    height: 40px;
-    background: #8B4513; /* Culoare de lemn brut */
-    background-image: repeating-linear-gradient(
-        45deg,
-        rgba(0,0,0,0.1) 0px,
-        rgba(0,0,0,0.1) 2px,
-        transparent 2px,
-        transparent 4px
-    ); /* Textură simplă de lemn */
+    position: absolute; /* SUPER IMPORTANT: Le scoate din fluxul normal de text */
+    padding: 10px;
+    background-color: #8B4513; /* Culoare de lemn */
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0px 4px 0px #5c2e0b; /* Efect de grosime 3D */
+    z-index: 5;
+}
+
+/* 3. Asigură-te că broasca stă PESTE lemne și este absolut poziționată */
+#personaj-wood {
+    width: 90px;  /* Mult mai mare și vizibilă */
+    height: 90px; 
+    position: absolute;
+    z-index: 999; 
+    transition: left 0.15s ease-out, transform 0.4s, opacity 0.4s;
+    transform: translateX(-50%);
+}
+
+#imagine-frog {
+    width: 100%;
+    height: auto;
+}
+
+/* =========================================
+   🐸 ANIMAȚIA "SARI PE DEASUPRA"
+   ========================================= */
+
+@keyframes sari-pe-deasupra {
+    0% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-50px); /* Arcul sariturii */
+    }
+    100% {
+        transform: translateX(-50%) translateY(0); 
+    }
+}
+
+
+.platforma-lemn {
+    z-index: 10;
+    width: 100px; /* Am făcut buștenii un pic mai lați */
+    height: 45px;
+    background: #8B4513; 
+    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 2px, transparent 2px, transparent 4px); 
     border-radius: 10px;
     border-bottom: 5px solid #5C3A21;
     position: absolute;
@@ -1068,11 +1083,14 @@ input[type=number] {
     font-weight: bold;
     cursor: pointer;
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-    transition: transform 0.2s;
+    
+    /* Când le tragem în jos, vor coborî lin */
+    transition: bottom 0.5s ease-in-out; 
 }
 
-.platforma-lemn:hover {
-    transform: scale(1.1);
+/* Efect când apeși pe ele */
+.platforma-lemn:active {
+    transform: scale(0.95);
 }
 
 

@@ -71,7 +71,7 @@
     </div>
 
     <div id="pagina-statistici" style="display:none"; padding: 40px; text-align: center;>
-        <h1 class="meniu-titlu titlu-raport" color: #333;>Raportul tău de <br class="doar-telefon"> Performanță</h1>
+        <h1 class="meniu-titlu titlu-raport" style="color: #333;">Raportul tau de <br class="doar-telefon"> Performanta</h1>
         <p1 class="subtitle2">Iata ce ai lucrat astazi:</p1>
 
         <div class="tabel-container-pagina">
@@ -110,6 +110,7 @@
             <div class="game-arrow">➔</div>
         </div>
 
+        <!--
         <div class="game-row" onclick="startRunner()">
             <div class="game-image-box">
                 <img src="runner.jpeg" alt="Runner">
@@ -120,6 +121,7 @@
             </div>
             <div class="game-arrow">➔</div>
         </div>
+        -->
 
         <div class="game-row" onclick="startWoodJump()">
             <div class="game-image-box">
@@ -132,9 +134,6 @@
             <div class="game-arrow">➔</div>
         </div>
     </div>
-
-    <div id="pagina-jocuri" style="display: none;">
-        </div>
 
     <div id="bingo-wrapper" style="display: none; text-align: center; padding: 20px;">
         
@@ -183,14 +182,12 @@
             <div id="operatie-woodjump">Pregătește-te de săritură!</div>
         </div>
 
-        <div id="padure-container" 
-            ontouchmove="gliseazaPersonaj(event)"
-            onmousemove="gliseazaPersonaj(event)">
-         
+        <div id="padure-container">
             <div id="platforme-container"></div>
-        
-            <div id="personaj-wood">🥷</div> 
-        </div>
+            <div id="personaj-wood">
+                <img src="frog.png" alt="Frog" id="imagine-frog">
+        </div> 
+    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

@@ -19,6 +19,8 @@ function switchCategory(category) {
     document.getElementById('pagina-jocuri').style.display = 'none';
     document.getElementById('bingo-joc-activ').style.display = 'none';
     document.getElementById('bingo-selectie-categorie').style.display = 'none';
+    document.getElementById('woodjump-wrapper').style.display = 'none';
+    document.getElementById('bingo-wrapper').style.display = 'none';
 
     // 2. AFIȘĂM DOAR CE TREBUIE în funcție de categorie
     if (category === 'arcade') {
