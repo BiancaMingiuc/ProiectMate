@@ -999,25 +999,44 @@ input[type=number] {
    ========================================= */
 
 #operatie-woodjump {
-    font-size: 3rem;
-    font-weight: 900;
-    color: #2c3e50;
-    background: white;
-    padding: 15px 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    border-bottom: 5px solid #4caf50;
+    font-size: 1.5rem; /* Text mult mai mic (înainte era 2rem sau 3rem) */
+    font-weight: 700; /* Mai puțin "gras" */
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.35); /* Chiar mai transparent */
+    padding: 4px 15px; /* Padding foarte îngust, doar cât să nu atingă marginile */
+    border-radius: 15px; /* Colțuri rotunjite fin */
+    display: inline-block;
+    margin: 5px auto; /* L-am ridicat mai sus */
+    border: none;
+    box-shadow: none;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8); /* Umbra textului ține literele clare */
+}
+
+/* Containerul care ține textul, ca să ne asigurăm că e centrat */
+.titlu-container-joc {
+    text-align: center;
+    width: 100%;
+    position: absolute; /* Îl scoatem din flux ca să se suprapună finuț pe cer */
+    top: 10px;
+    z-index: 100;
 }
 
 /* 1. Oprește deformarea ecranului și fixează înălțimea jocului */
 #padure-container {
-    position: relative;
-    width: 100%;
-    height: 400px; /* Acum broasca știe exact cât spațiu are să sară! Poți schimba la 500px dacă vrei mai mare */
-    overflow: hidden; /* Ascunde lemnele care cad, oprind ecranul din a se redimensiona */
-    background-color: #4fc3f7; /* O culoare albastră pentru apa/cer (Opțional) */
-    border-radius: 15px; /* Colțuri rotunjite frumoase */
-    margin-top: 20px;
+    width: 95%;          /* Ocupă aproape toată lățimea ecranului pe telefon */
+    max-width: 900px;    /* L-am mărit de la 600px la 900px pentru laptop/desktop! */
+    height: 75vh;        /* Ocupă 75% din înălțimea ecranului tău */
+    min-height: 650px;   /* Am mărit înălțimea minimă pentru ca buștenii să aibă loc să respire */
+    
+    /* Restul rămâne la fel: */
+    margin: 20px auto;
+    background: linear-gradient(to bottom, #87CEEB 0%, #a8e6cf 100%);
+    border-radius: 20px;
+    position: relative; 
+    overflow: hidden; 
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.1), 0 10px 30px rgba(0,0,0,0.15);
+    border: 4px solid #fff;
+    touch-action: none; 
 }
 
 /* 2. Asigură-te că lemnele sunt absolut poziționate */
@@ -1036,33 +1055,37 @@ input[type=number] {
 
 /* 3. Asigură-te că broasca stă PESTE lemne și este absolut poziționată */
 #personaj-wood {
-    width: 90px;  /* Mult mai mare și vizibilă */
+    width: 90px;  
     height: 90px; 
     position: absolute;
     z-index: 999; 
-    transition: left 0.15s ease-out, transform 0.4s, opacity 0.4s;
+    
+    /* Am reintrodus "bottom" aici ca să urce lin în acele 0.8 secunde */
+    transition: left 0.05s linear, bottom 0.8s ease-out, opacity 0.4s;
     transform: translateX(-50%);
 }
 
-#imagine-frog {
-    width: 100%;
-    height: auto;
+.sare {
+    /* Animația durează 0.8s, la fel ca tranziția de sus */
+    animation: sari-pe-deasupra 0.8s linear;
 }
-
-/* =========================================
-   🐸 ANIMAȚIA "SARI PE DEASUPRA"
-   ========================================= */
 
 @keyframes sari-pe-deasupra {
     0% {
         transform: translateX(-50%) translateY(0);
     }
     50% {
-        transform: translateX(-50%) translateY(-50px); /* Arcul sariturii */
+        /* Arcul este mult mai mic acum (doar -30px). Nu va mai ieși din ecran! */
+        transform: translateX(-50%) translateY(-30px); 
     }
     100% {
         transform: translateX(-50%) translateY(0); 
     }
+}
+
+#imagine-frog {
+    width: 100%;
+    height: auto;
 }
 
 
@@ -1092,5 +1115,4 @@ input[type=number] {
 .platforma-lemn:active {
     transform: scale(0.95);
 }
-
 

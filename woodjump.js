@@ -1,5 +1,5 @@
 // =========================================
-// 🌲 JOCUL WOOD JUMP (SĂRITURI GHIDATE / SMART AIM)
+// 🌲 JOCUL WOOD JUMP (MOTOR DE JOC CONTINUU - ZERO DELAY)
 // =========================================
 
 let jocWoodActiv = false;
@@ -9,17 +9,23 @@ let tipWoodCurent = 'adunare';
 let vieti = 3; 
 
 let pozCurentaX = 50; 
-let pozCurentaY = 27; 
+let pozCurentaY = 22; 
 
-const BAZA_Y = 15; 
-const SUS_Y = 65;  
+const BAZA_Y = 10; 
+const SUS_Y = 75;  
+
+// === MOTORUL DE MIȘCARE ===
+let tastaStanga = false;
+let tastaDreapta = false;
+let loopMiscare = null;
+let inAnimatieCadere = false;
 
 function startWoodJump() {
     document.getElementById('pagina-jocuri').style.display = 'none';
     document.getElementById('woodjump-wrapper').style.display = 'block';
     
     const ninja = document.getElementById('personaj-wood');
-    ninja.style.transition = "left 0.15s ease-out, transform 0.4s, opacity 0.4s";
+    ninja.style.transition = "left 0.05s linear, transform 0.8s ease-out, opacity 0.4s";
     
     initiazaWoodJump();
 }
@@ -29,6 +35,7 @@ function initiazaWoodJump() {
     vieti = 3; 
     sarituriInRunda = 0; 
     sarituraInCurs = false;
+    inAnimatieCadere = false;
     
     if(typeof corecte !== 'undefined') corecte = 0;
     if(typeof gresite !== 'undefined') gresite = 0;
@@ -41,14 +48,42 @@ function initiazaWoodJump() {
     ninja.style.transform = "translateX(-50%) scale(1) rotate(0deg)";
     ninja.style.opacity = "1";
     
-    // Start pe centru
     creeazaLemn("50%", BAZA_Y, "", true, true, "vechi");
     
     pozCurentaX = 50;
     pozCurentaY = BAZA_Y + 12;
     aplicaPozitieBroasca();
 
+    // Pornim motorul care verifică tastele la fiecare 30ms (aprox 33 cadre pe secundă)
+    if (loopMiscare) clearInterval(loopMiscare);
+    loopMiscare = setInterval(motorMiscareLina, 30);
+
     genereazaUrmatorulNivel();
+}
+
+function motorMiscareLina() {
+    // Dacă jocul e oprit sau broasca e în animația de înec, nu ne mai putem mișca
+    if (!jocWoodActiv || inAnimatieCadere) return;
+
+    let sAMiscat = false;
+    let viteza = 2; // Viteza broaștei. La 33 fps, acoperă tot ecranul într-o secundă!
+
+    if (tastaStanga) {
+        pozCurentaX -= viteza;
+        if (pozCurentaX < 5) pozCurentaX = 5;
+        sAMiscat = true;
+    }
+    if (tastaDreapta) {
+        pozCurentaX += viteza;
+        if (pozCurentaX > 95) pozCurentaX = 95;
+        sAMiscat = true;
+    }
+
+    if (sAMiscat) {
+        aplicaPozitieBroasca();
+        // Verificăm dacă alunecă de pe lemn doar dacă este pe pământ (nu în săritură)
+        if (!sarituraInCurs) verificaAterizareInMers();
+    }
 }
 
 function actualizeazaScor() {
@@ -71,21 +106,19 @@ function aplicaPozitieBroasca() {
 function declanseazaAnimatieSarit() {
     const ninja = document.getElementById('personaj-wood');
     ninja.classList.remove('sare');
-    void ninja.offsetWidth; // Force reflow
+    void ninja.offsetWidth; 
     ninja.classList.add('sare');
 }
 
 function genereazaUrmatorulNivel() {
     sarituriInRunda++;
-    const container = document.getElementById('platforme-container');
-
+    
     if (sarituriInRunda < 2) {
         let pozRandomX = Math.floor(Math.random() * 50) + 25 + "%"; 
         creeazaLemn(pozRandomX, SUS_Y, "", true, true, "nou");
-        seteazaMesaj("Apasă Săgeata SUS (↑) pentru a sări!");
     } else {
         let intrebare = genereazaIntrebareWood(); 
-        seteazaMesaj(`${intrebare.text} = ? (Stânga ← / Dreapta →)`);
+        seteazaMesaj(`${intrebare.text} = ?`);
         
         let corectPeStanga = Math.random() > 0.5; 
         creeazaLemn("25%", SUS_Y, corectPeStanga ? intrebare.corect : intrebare.gresit, corectPeStanga, false, "nou");
@@ -112,65 +145,99 @@ function creeazaLemn(pozitieX, pozitieY, text, esteCorect, esteSimplu, stare) {
     lemn.style.transform = "translateX(-50%)"; 
     lemn.style.transition = "bottom 0.5s ease, transform 0.5s ease"; 
     
-    // Suport click pe telefon sau mouse
     lemn.onclick = function() {
-        efectueazaSarituaGhidata(this);
+        if (sarituraInCurs || this.dataset.stare === "vechi" || inAnimatieCadere) return; 
+        sarituraInCurs = true;
+        
+        pozCurentaX = parseFloat(this.style.left);
+        pozCurentaY = parseFloat(this.style.bottom) + 12;
+        
+        declanseazaAnimatieSarit();
+        aplicaPozitieBroasca();
+        setTimeout(() => verificaAterizareDupaSaritura(), 800); 
     };
     
     container.appendChild(lemn);
 }
 
 // =========================================
-// 🎮 CONTROALE GHIDATE
+// 🎮 CONTROALE CITITE INSTANTANEU
 // =========================================
 document.addEventListener('keydown', function(event) {
-    if (!jocWoodActiv || sarituraInCurs) return;
+    if (!jocWoodActiv || inAnimatieCadere) return;
 
-    const lemneNoi = document.querySelectorAll('.platforma-lemn[data-stare="nou"]');
-    if (lemneNoi.length === 0) return;
-
-    let lemnTinta = null;
-
-    // Logica de Auto-Aintire
-    if (lemneNoi.length === 1) { 
-        if (event.key === 'ArrowUp') lemnTinta = lemneNoi[0];
-    } else if (lemneNoi.length === 2) { 
-        // Găsim care lemn e în stânga și care e în dreapta
-        let lemnStanga = parseFloat(lemneNoi[0].style.left) < 50 ? lemneNoi[0] : lemneNoi[1];
-        let lemnDreapta = parseFloat(lemneNoi[0].style.left) > 50 ? lemneNoi[0] : lemneNoi[1];
-
-        if (event.key === 'ArrowLeft') lemnTinta = lemnStanga;
-        else if (event.key === 'ArrowRight') lemnTinta = lemnDreapta;
-    }
-
-    if (lemnTinta) {
+    if (event.key === 'ArrowLeft') {
+        tastaStanga = true;
         event.preventDefault();
-        efectueazaSarituaGhidata(lemnTinta);
-    }
+    } 
+    else if (event.key === 'ArrowRight') {
+        tastaDreapta = true;
+        event.preventDefault();
+    } 
+    else if (event.key === 'ArrowUp') {
+        if (sarituraInCurs) return; 
+        
+        sarituraInCurs = true; 
+        pozCurentaY = SUS_Y + 12; 
+        
+        declanseazaAnimatieSarit();
+        aplicaPozitieBroasca();
+        
+        setTimeout(() => verificaAterizareDupaSaritura(), 800); 
+        event.preventDefault();
+    } 
 });
 
-function efectueazaSarituaGhidata(lemnDestinatie) {
-    if (sarituraInCurs || lemnDestinatie.dataset.stare === "vechi") return; 
+// Când ridici degetul de pe tastă, broasca se oprește instant!
+document.addEventListener('keyup', function(event) {
+    if (event.key === 'ArrowLeft') tastaStanga = false;
+    if (event.key === 'ArrowRight') tastaDreapta = false;
+});
+
+function verificaAterizareInMers() {
+    let lemnAtins = null;
+    const lemne = document.querySelectorAll('.platforma-lemn');
     
-    sarituraInCurs = true; 
-    
-    // Setăm coordonatele broaștei exact pe lemnul dorit (nu mai există șansa să rateze!)
-    pozCurentaX = parseFloat(lemnDestinatie.style.left);
-    pozCurentaY = parseFloat(lemnDestinatie.style.bottom) + 12;
-    
-    declanseazaAnimatieSarit();
-    aplicaPozitieBroasca();
-    
-    // Așteptăm 400ms să se termine animația de zbor
-    setTimeout(() => {
-        verificaStareAterizare(lemnDestinatie);
-    }, 400); 
+    lemne.forEach(lemn => {
+        let lemnX = parseFloat(lemn.style.left);
+        let lemnY = parseFloat(lemn.style.bottom);
+        
+        if (Math.abs(pozCurentaY - (lemnY + 12)) <= 10) {
+            if (Math.abs(pozCurentaX - lemnX) <= 25) {
+                lemnAtins = lemn;
+            }
+        }
+    });
+
+    if (!lemnAtins) caziInApa("Ai alunecat de pe lemn!"); 
 }
 
-function verificaStareAterizare(lemnAtins) {
-    // Verificăm dacă e nivel nou
-    if (lemnAtins.dataset.stare === "nou" && pozCurentaY > BAZA_Y + 10) {
-        proceseazaLemnMatematic(lemnAtins);
+function verificaAterizareDupaSaritura() {
+    let lemnAtins = null;
+    const lemne = document.querySelectorAll('.platforma-lemn');
+    
+    lemne.forEach(lemn => {
+        let lemnX = parseFloat(lemn.style.left);
+        let lemnY = parseFloat(lemn.style.bottom);
+        
+        if (Math.abs(pozCurentaY - (lemnY + 12)) <= 10) {
+            if (Math.abs(pozCurentaX - lemnX) <= 25) {
+                lemnAtins = lemn;
+            }
+        }
+    });
+
+    if (!lemnAtins) {
+        caziInApa("Ai ratat aterizarea!"); 
+    } else {
+        pozCurentaX = parseFloat(lemnAtins.style.left);
+        aplicaPozitieBroasca();
+
+        if (lemnAtins.dataset.stare === "nou" && pozCurentaY > BAZA_Y + 10) {
+            proceseazaLemnMatematic(lemnAtins);
+        } else {
+             sarituraInCurs = false; 
+        }
     }
 }
 
@@ -188,7 +255,7 @@ function proceseazaLemnMatematic(lemn) {
             
             setTimeout(() => {
                 lemn.style.transform = "translateX(-50%) scale(0)"; 
-                caziInApa(); 
+                caziInApa("Lemnul s-a scufundat!"); 
             }, 500);
         }
     } else {
@@ -196,14 +263,19 @@ function proceseazaLemnMatematic(lemn) {
     }
 }
 
-function caziInApa() {
+function caziInApa(mesaj) {
+    if (inAnimatieCadere) return; // Prevent multiple triggers
+    
+    inAnimatieCadere = true;
     sarituraInCurs = true; 
+    tastaStanga = false; // Oprim miscarea
+    tastaDreapta = false;
     
     const ninja = document.getElementById('personaj-wood');
     ninja.style.transform = "translateX(-50%) scale(0) rotate(360deg)";
     ninja.style.opacity = "0";
 
-    document.getElementById('operatie-woodjump').innerText = "💦 SPLASH! Ai căzut!";
+    document.getElementById('operatie-woodjump').innerText = `💦 SPLASH! ${mesaj}`;
 
     setTimeout(() => {
         vieti--;
@@ -213,7 +285,6 @@ function caziInApa() {
             alert("Game Over! Ai rămas fără vieți.");
             initiazaWoodJump();
         } else {
-            // Respawn pe lemnul de jos
             let lemnBaza = document.querySelector('.platforma-lemn[data-stare="vechi"]');
             if(lemnBaza) pozCurentaX = parseFloat(lemnBaza.style.left);
             else pozCurentaX = 50;
@@ -227,8 +298,9 @@ function caziInApa() {
             ninja.style.opacity = "1";
             
             setTimeout(() => {
-                ninja.style.transition = "left 0.15s ease-out, transform 0.4s, opacity 0.4s";
+                ninja.style.transition = "left 0.05s linear, bottom 0.8s ease-out, opacity 0.4s";
                 sarituraInCurs = false;
+                inAnimatieCadere = false;
                 document.getElementById('operatie-woodjump').innerText = document.getElementById('operatie-woodjump').dataset.intrebareCurenta || "Încearcă din nou!";
             }, 50);
         }
@@ -259,31 +331,33 @@ function coboaraTotEcranul() {
 
 function genereazaIntrebareWood() {
     let n1, n2, corect, textIntrebare;
+    const operatiiPosibile = ['adunare','scadere','inmultire','impartire'];
+    let operatie = operatiiPosibile[Math.floor(Math.random()*operatiiPosibile.length)];
 
-    if (tipWoodCurent === 'adunare') {
+    if (operatie === 'adunare') {
         n1 = Math.floor(Math.random() * 20) + 1;
         n2 = Math.floor(Math.random() * 20) + 1;
         corect = n1 + n2;
         textIntrebare = `${n1} + ${n2}`;
-    } else if (tipWoodCurent === 'scadere') {
+    } else if (operatie === 'scadere') {
         n1 = Math.floor(Math.random() * 20) + 10;
         n2 = Math.floor(Math.random() * n1) + 1;
         corect = n1 - n2;
         textIntrebare = `${n1} - ${n2}`;
-    } else if (tipWoodCurent === 'inmultire') {
+    } else if (operatie === 'inmultire') {
         n1 = Math.floor(Math.random() * 10) + 1;
         n2 = Math.floor(Math.random() * 10) + 1;
         corect = n1 * n2;
         textIntrebare = `${n1} x ${n2}`;
     } else { 
-        n2 = Math.floor(Math.random() * 9) + 1;
+        n2 = Math.floor(Math.random() * 5) - 2;
         corect = Math.floor(Math.random() * 10) + 1;
         n1 = n2 * corect;
         textIntrebare = `${n1} : ${n2}`;
     }
 
     let diferenta = Math.floor(Math.random() * 3) + 1;
-    let gresit = corect + (Math.random() > 0.5 ? diferenta : -diferenta);
+    let gresit = corect + diferenta;
     if (gresit < 0) gresit = corect + 2; 
 
     return { text: textIntrebare, corect: corect, gresit: gresit };
@@ -291,6 +365,7 @@ function genereazaIntrebareWood() {
 
 function inchideSesiuneaWoodJump() {
     jocWoodActiv = false;
+    if (loopMiscare) clearInterval(loopMiscare);
     if (typeof finalizeazaSesiunea === "function") finalizeazaSesiunea(); 
     document.getElementById('woodjump-wrapper').style.display = 'none';
     document.getElementById('pagina-jocuri').style.display = 'block';
