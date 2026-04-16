@@ -17,9 +17,6 @@ def analizeaza_date_mate():
 
     df['created_at'] = pd.to_datetime(df['created_at'])
     
-    df['tip_operatie'] = df['tip_operatie'].replace('EMPTY', 'ALTELE')
-
-    
     per_elev = df.groupby('nume_elev')[['scor_corecte', 'scor_gresite']].sum()
     
     per_elev.plot(kind='bar', figsize=(10, 5), color=['#4CAF50', '#F44336'])
