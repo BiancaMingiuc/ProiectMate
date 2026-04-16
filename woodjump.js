@@ -28,6 +28,7 @@ function startWoodJump() {
 }
 
 function initiazaWoodJump() {
+    tipCurent = "Wood Jump";
     jocWoodActiv = true;
     vieti = 3; 
     sarituriInRunda = 0; 
@@ -272,7 +273,8 @@ function caziInApa(mesaj) {
         actualizeazaScor();
 
         if (vieti <= 0) {
-            alert("Game Over! Ai rămas fără vieți.");
+            showToast("Game Over! Ai rămas fără vieți.");
+            finalizeazaSesiunea();
             initiazaWoodJump();
         } else {
             let lemnBaza = document.querySelector('.platforma-lemn[data-stare="vechi"]');

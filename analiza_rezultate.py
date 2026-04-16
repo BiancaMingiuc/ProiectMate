@@ -45,7 +45,7 @@ def analizeaza_date_mate():
         plt.tight_layout()
         plt.show()
     else:
-        print("Nu există suficiente date pentru evoluția Biancăi.")
+        print("Nu există suficiente date.")
 
 if __name__ == "__main__":
     analizeaza_date_mate()
