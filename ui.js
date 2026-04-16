@@ -6,9 +6,7 @@ function startJoc(tip){
     document.querySelector('.header-container').style.display = 'none';
     document.querySelector('.meniu-principal').style.display = 'none';
     document.querySelector('.subtitle-container').style.display = 'none';
-    //document.querySelector('pagina-jocuri').style.display = 'none';
     
-    // Afișăm zona de lucru
     document.getElementById('zona-exercitiu').style.display = 'block';
     
     executaGenerare(tip);
@@ -17,7 +15,6 @@ function startJoc(tip){
 }
 
 
-//ACTUALIZARE SCORURI
 function actualizeazaAfisajScor() {
     const elCorecte = document.getElementById('scor-corecte');
     const elGresite = document.getElementById('scor-gresite');
@@ -32,29 +29,11 @@ function actualizeazaAfisajScor() {
 }
 
 
-//SALVARE IN TABEL
-function salveazaInTabel() {
-    const tbody = document.getElementById('istoric-body');
-    const rand = tbody.insertRow(0); // Adăugăm mereu sus (cel mai recent)
-
-    const acum = new Date();
-    const ora = acum.getHours() + ":" + acum.getMinutes().toString().padStart(2, '0');
-
-    rand.insertCell(0).innerText = ora;
-    rand.insertCell(1).innerText = tipCurent;
-    rand.insertCell(2).innerText = corecte;
-    rand.insertCell(3).innerText = gresite;
-    
-    // Resetăm contoarele după salvare ca să nu salvăm duplicat
-    corecte = 0;
-    gresite = 0;
-}
 
 //NOTIFICARE
 function showToast(mesaj) {
     let container = document.getElementById('toast-container');
 
-    // 2. Dacă NU există, îl creăm noi prin cod acum
     if (!container) {
         container = document.createElement('div');
         container.id = 'toast-container';
@@ -62,17 +41,14 @@ function showToast(mesaj) {
         document.body.appendChild(container);
     }
 
-    // 3. Creăm notificarea propriu-zisă
     const toast = document.createElement('div');
-    toast.className = 'notificare-telefon'; // sau 'toast'
+    toast.className = 'notificare-telefon'; 
     toast.innerText = mesaj;
     container.appendChild(toast);
 
-    // Îl ștergem automat după 3 secunde
     setTimeout(() => {
         toast.classList.add('dispare-toast');
         
-        // Așteptăm să se termine animația CSS (500ms) apoi îl ștergem
         setTimeout(() => {
             toast.remove();
         }, 500);

@@ -8,5 +8,5 @@ let numeUtilizatorGlobal = "";
 
 let tipBingoCurent = ''; 
 let raspunsCorectBingo = 0;
-let celuleBingo = []; // Aici vom stoca datele despre cele 9 sau 25 de căsuțe
+let celuleBingo = []; 
 let dimensiuneGrid = 3; 

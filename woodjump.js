@@ -1,6 +1,3 @@
-// =========================================
-// 🌲 JOCUL WOOD JUMP (MOTOR DE JOC CONTINUU - ZERO DELAY)
-// =========================================
 
 let jocWoodActiv = false;
 let sarituriInRunda = 0; 
@@ -14,7 +11,6 @@ let pozCurentaY = 22;
 const BAZA_Y = 10; 
 const SUS_Y = 75;  
 
-// === MOTORUL DE MIȘCARE ===
 let tastaStanga = false;
 let tastaDreapta = false;
 let loopMiscare = null;
@@ -54,7 +50,6 @@ function initiazaWoodJump() {
     pozCurentaY = BAZA_Y + 12;
     aplicaPozitieBroasca();
 
-    // Pornim motorul care verifică tastele la fiecare 30ms (aprox 33 cadre pe secundă)
     if (loopMiscare) clearInterval(loopMiscare);
     loopMiscare = setInterval(motorMiscareLina, 30);
 
@@ -62,11 +57,10 @@ function initiazaWoodJump() {
 }
 
 function motorMiscareLina() {
-    // Dacă jocul e oprit sau broasca e în animația de înec, nu ne mai putem mișca
     if (!jocWoodActiv || inAnimatieCadere) return;
 
     let sAMiscat = false;
-    let viteza = 2; // Viteza broaștei. La 33 fps, acoperă tot ecranul într-o secundă!
+    let viteza = 2; 
 
     if (tastaStanga) {
         pozCurentaX -= viteza;
@@ -81,7 +75,6 @@ function motorMiscareLina() {
 
     if (sAMiscat) {
         aplicaPozitieBroasca();
-        // Verificăm dacă alunecă de pe lemn doar dacă este pe pământ (nu în săritură)
         if (!sarituraInCurs) verificaAterizareInMers();
     }
 }
@@ -160,9 +153,6 @@ function creeazaLemn(pozitieX, pozitieY, text, esteCorect, esteSimplu, stare) {
     container.appendChild(lemn);
 }
 
-// =========================================
-// 🎮 CONTROALE CITITE INSTANTANEU
-// =========================================
 document.addEventListener('keydown', function(event) {
     if (!jocWoodActiv || inAnimatieCadere) return;
 
@@ -188,7 +178,6 @@ document.addEventListener('keydown', function(event) {
     } 
 });
 
-// Când ridici degetul de pe tastă, broasca se oprește instant!
 document.addEventListener('keyup', function(event) {
     if (event.key === 'ArrowLeft') tastaStanga = false;
     if (event.key === 'ArrowRight') tastaDreapta = false;
@@ -264,11 +253,11 @@ function proceseazaLemnMatematic(lemn) {
 }
 
 function caziInApa(mesaj) {
-    if (inAnimatieCadere) return; // Prevent multiple triggers
+    if (inAnimatieCadere) return; 
     
     inAnimatieCadere = true;
     sarituraInCurs = true; 
-    tastaStanga = false; // Oprim miscarea
+    tastaStanga = false; 
     tastaDreapta = false;
     
     const ninja = document.getElementById('personaj-wood');

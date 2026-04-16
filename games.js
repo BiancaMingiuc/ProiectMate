@@ -1,20 +1,16 @@
 //BINGO
 function startBingo() {
-    // 1. Ascundem meniul de jocuri
     document.getElementById('zona-exercitiu').style.display = 'none';
     document.getElementById('pagina-jocuri').style.display = 'none';
 
-    // 2. Afișăm "pagina" de Bingo
     document.getElementById('bingo-wrapper').style.display = 'block';
     
-    // 3. Ne asigurăm că arătăm butoanele de selecție și ascundem grila
     document.getElementById('bingo-selectie-categorie').style.display = 'block';
     document.getElementById('bingo-joc-activ').style.display = 'none';
 }
 
 function initiazaBingo(tip){
     tipBingoCurent = tip;
-    //tipCurent = "BINGO: " + tip.toUpperCase;
     celuleBingo = [];
     dimensiuneGrid = (tip === 'inmultire') ? 5 : 3;
     let totalCelule = dimensiuneGrid * dimensiuneGrid;
@@ -50,28 +46,21 @@ function initiazaBingo(tip){
 }
 
 
-// 2. Desenează grila pe ecran
 function deseneazaGridBingo() {
-    // Găsim containerul unde vom pune butoanele
     const grid = document.getElementById('bingo-grid');
     
-    // Curățăm orice butoane vechi (în caz că dăm "Joacă din nou")
     grid.innerHTML = "";
     
-    // Îi dăm clasa corectă de CSS pentru a le așeza (grid-3x3 sau grid-5x5)
     grid.className = `bingo-grid grid-${dimensiuneGrid}x${dimensiuneGrid}`; 
 
-    // Luăm lista noastră de numere și creăm un buton HTML pentru fiecare
     celuleBingo.forEach((celula, index) => {
-        const btn = document.createElement('button'); // Creăm butonul
-        btn.className = 'bingo-cell';                 // Îi dăm stilul de CSS
-        btn.innerText = celula.valoare;               // Punem numărul pe el (ex: 56)
-        btn.id = `bingo-btn-${index}`;                // Îi dăm un ID unic
+        const btn = document.createElement('button'); 
+        btn.className = 'bingo-cell';                 
+        btn.innerText = celula.valoare;               
+        btn.id = `bingo-btn-${index}`;                
         
-        // Ce se întâmplă când dăm click pe el? Apelăm funcția de verificare!
         btn.onclick = () => verificaRaspunsBingo(celula.valoare, index, btn);
         
-        // Adăugăm butonul terminat în grila de pe ecran
         grid.appendChild(btn);
     });
 }
@@ -107,14 +96,12 @@ function verificaRaspunsBingo(valoareAleasa, index, butonHtml) {
         corecte++; 
 
         if (verificaDacaAvemBingo()) {
-            // Dacă am făcut Bingo, afișăm direct fereastra mare
             document.getElementById('modal-bingo').style.display = 'flex';
         } else {
             setTimeout(genereazaIntrebareNoua, 400); 
         }
 
     } else {
-        // --- GREȘIT ---
         butonHtml.style.backgroundColor = "#F44336"; 
         butonHtml.style.color = "white";
         butonHtml.style.borderColor = "#c62828";
@@ -126,7 +113,6 @@ function verificaRaspunsBingo(valoareAleasa, index, butonHtml) {
     }
 }
 
-// 5. Verifică dacă avem o linie/coloană/diagonală de BINGO complet verde
 function verificaDacaAvemBingo() {
     let d = dimensiuneGrid;
     
@@ -148,14 +134,14 @@ function verificaDacaAvemBingo() {
         if (coloanaCompleta) return true;
     }
 
-    // Diagonala 1
+    // Diag1
     let diag1Completa = true;
     for (let i = 0; i < d; i++) {
         if (celuleBingo[i * d + i].stare !== 'verde') diag1Completa = false;
     }
     if (diag1Completa) return true;
 
-    // Diagonala 2
+    // Diag2
     let diag2Completa = true;
     for (let i = 0; i < d; i++) {
         if (celuleBingo[i * d + (d - 1 - i)].stare !== 'verde') diag2Completa = false;
@@ -166,17 +152,14 @@ function verificaDacaAvemBingo() {
 }
 
 function reincepeBingo() {
-    console.log("Resetăm jocul..."); // Linie pentru test
-    // 1. Ascundem fereastra de Bingo
+    console.log("Resetăm jocul..."); 
     document.getElementById('modal-bingo').style.display = 'none';
     
-    // 2. Repornim logica de generare (folosind categoria salvată anterior)
     initiazaBingo(tipBingoCurent); 
 }
 
 function inchideSesiuneaBingo() {
-    console.log("Ne întoarcem la meniu..."); // Linie pentru test
-    // 1. Ascundem fereastra de Bingo și tot wrapper-ul de joc
+    console.log("Ne întoarcem la meniu..."); 
     tipCurent = "BINGO: " + tipBingoCurent.toUpperCase();
 
     finalizeazaSesiunea();
@@ -185,10 +168,8 @@ function inchideSesiuneaBingo() {
     document.getElementById('bingo-wrapper').style.display = 'none';
     document.getElementById('meniu-principal').style.display = 'none';
     
-    // 2. Arătăm din nou meniul principal de jocuri
     document.getElementById('pagina-jocuri').style.display = 'block';
     
-    // Opțional: resetăm scorurile globale dacă le folosești
     corecte = 0;
     gresite = 0;
 }

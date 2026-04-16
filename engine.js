@@ -50,15 +50,12 @@ function genereazaInmultire(){
 
 function genereazaImpartire() {
     let rezultatAsteptat = genereazaRandom(1, 10);
-    numar2 = genereazaRandom(1, 10); // Împărțitorul
+    numar2 = genereazaRandom(1, 10); 
     
-    // Pas 3: Calculăm numărul mare (Deîmpărțitul)
     numar1 = rezultatAsteptat * numar2; 
     
-    // Regula finală: Rezultatul corect pe care îl va verifica funcția verifica()
     rezultatCorect = rezultatAsteptat;
 
-    // Afișăm pe ecran: numar1 : numar2 = ?
     document.getElementById('num1').innerText = numar1;
     document.getElementById('num2').innerText = numar2;
     document.getElementById('operator').innerText = " : ";
@@ -69,7 +66,6 @@ function genereazaImpartire() {
 }
 
 function executaGenerare(tip) {
-    // Dacă tipul este MIXT, alegem la întâmplare o operație
     let tipEfectiv = tip;
     const elementTitlu = document.getElementById('titlu-operatie');
     
@@ -77,16 +73,14 @@ function executaGenerare(tip) {
         const optiuni = ['adunare', 'scadere', 'inmultire', 'impartire'];
         tipEfectiv = optiuni[Math.floor(Math.random() * optiuni.length)];
         
-        // Titlul va arăta și ce operație a picat la zar
         if (elementTitlu) {
             elementTitlu.innerText = "MIXTE: " + tipEfectiv.toUpperCase();
-            elementTitlu.style.color = "#764ba2"; // Culoare specială pentru mixt
+            elementTitlu.style.color = "#764ba2"; 
         }
     } else {
-        // 2. Dacă e un mod fix, scriem exact numele operației
         if (elementTitlu) {
             elementTitlu.innerText = tip.toUpperCase();
-            elementTitlu.style.color = "#2c3e50"; // Culoare normală
+            elementTitlu.style.color = "#2c3e50"; 
         }
     }
 
