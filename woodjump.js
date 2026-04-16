@@ -23,6 +23,7 @@ function startWoodJump() {
     const frog = document.getElementById('personaj-wood');
     frog.style.transition = "left 0.05s linear, transform 0.8s ease-out, opacity 0.4s";
     
+
     initiazaWoodJump();
 }
 
@@ -330,7 +331,7 @@ function genereazaIntrebareWood() {
         textIntrebare = `${n1} + ${n2}`;
     } else if (operatie === 'scadere') {
         n1 = Math.floor(Math.random() * 20) + 10;
-        n2 = Math.floor(Math.random() * n1) + 1;
+        n2 = Math.floor(Math.random() * (n1-1)) + 1;
         corect = n1 - n2;
         textIntrebare = `${n1} - ${n2}`;
     } else if (operatie === 'inmultire') {
@@ -339,7 +340,7 @@ function genereazaIntrebareWood() {
         corect = n1 * n2;
         textIntrebare = `${n1} x ${n2}`;
     } else { 
-        n2 = Math.floor(Math.random() * 5) - 2;
+        n2 = Math.floor(Math.random() * 5) + 2;
         corect = Math.floor(Math.random() * 10) + 1;
         n1 = n2 * corect;
         textIntrebare = `${n1} : ${n2}`;
