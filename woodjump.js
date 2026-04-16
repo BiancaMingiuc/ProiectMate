@@ -20,8 +20,8 @@ function startWoodJump() {
     document.getElementById('pagina-jocuri').style.display = 'none';
     document.getElementById('woodjump-wrapper').style.display = 'block';
     
-    const ninja = document.getElementById('personaj-wood');
-    ninja.style.transition = "left 0.05s linear, transform 0.8s ease-out, opacity 0.4s";
+    const frog = document.getElementById('personaj-wood');
+    frog.style.transition = "left 0.05s linear, transform 0.8s ease-out, opacity 0.4s";
     
     initiazaWoodJump();
 }
@@ -39,10 +39,10 @@ function initiazaWoodJump() {
     actualizeazaScor();
     document.getElementById('platforme-container').innerHTML = ''; 
     
-    const ninja = document.getElementById('personaj-wood');
-    ninja.classList.remove('sare'); 
-    ninja.style.transform = "translateX(-50%) scale(1) rotate(0deg)";
-    ninja.style.opacity = "1";
+    const frog = document.getElementById('personaj-wood');
+    frog.classList.remove('sare'); 
+    frog.style.transform = "translateX(-50%) scale(1) rotate(0deg)";
+    frog.style.opacity = "1";
     
     creeazaLemn("50%", BAZA_Y, "", true, true, "vechi");
     
@@ -91,16 +91,16 @@ function seteazaMesaj(text) {
 }
 
 function aplicaPozitieBroasca() {
-    const ninja = document.getElementById('personaj-wood');
-    ninja.style.left = pozCurentaX + "%";
-    ninja.style.bottom = pozCurentaY + "%"; 
+    const frog = document.getElementById('personaj-wood');
+    frog.style.left = pozCurentaX + "%";
+    frog.style.bottom = pozCurentaY + "%"; 
 }
 
 function declanseazaAnimatieSarit() {
-    const ninja = document.getElementById('personaj-wood');
-    ninja.classList.remove('sare');
-    void ninja.offsetWidth; 
-    ninja.classList.add('sare');
+    const frog = document.getElementById('personaj-wood');
+    frog.classList.remove('sare');
+    void frog.offsetWidth; 
+    frog.classList.add('sare');
 }
 
 function genereazaUrmatorulNivel() {
@@ -260,9 +260,9 @@ function caziInApa(mesaj) {
     tastaStanga = false; 
     tastaDreapta = false;
     
-    const ninja = document.getElementById('personaj-wood');
-    ninja.style.transform = "translateX(-50%) scale(0) rotate(360deg)";
-    ninja.style.opacity = "0";
+    const frog = document.getElementById('personaj-wood');
+    frog.style.transform = "translateX(-50%) scale(0) rotate(360deg)";
+    frog.style.opacity = "0";
 
     document.getElementById('operatie-woodjump').innerText = `💦 SPLASH! ${mesaj}`;
 
@@ -280,14 +280,14 @@ function caziInApa(mesaj) {
             
             pozCurentaY = BAZA_Y + 12;
             
-            ninja.style.transition = "none"; 
+            frog.style.transition = "none"; 
             aplicaPozitieBroasca();
             
-            ninja.style.transform = "translateX(-50%) scale(1) rotate(0deg)";
-            ninja.style.opacity = "1";
+            frog.style.transform = "translateX(-50%) scale(1) rotate(0deg)";
+            frog.style.opacity = "1";
             
             setTimeout(() => {
-                ninja.style.transition = "left 0.05s linear, bottom 0.8s ease-out, opacity 0.4s";
+                frog.style.transition = "left 0.05s linear, bottom 0.8s ease-out, opacity 0.4s";
                 sarituraInCurs = false;
                 inAnimatieCadere = false;
                 document.getElementById('operatie-woodjump').innerText = document.getElementById('operatie-woodjump').dataset.intrebareCurenta || "Încearcă din nou!";
